@@ -6,10 +6,10 @@ Unofficial implementation of paper https://arxiv.org/abs/2303.14535
 | Model         | Dataset    | Official Paper | efficientad.py |
 |---------------|------------|----------------|----------------|
 | EfficientAD-M | VisA       | 98.1           | pending        |
-| EfficientAD-M | Mvtec LOCO | 90.7           | pending        |
+| EfficientAD-M | Mvtec LOCO | 90.7           | 90.1           |
 | EfficientAD-M | Mvtec AD   | 99.1           | 99.1           |
 | EfficientAD-S | VisA       | 97.5           | pending        |
-| EfficientAD-S | Mvtec LOCO | 90.0           | pending        |
+| EfficientAD-S | Mvtec LOCO | 90.0           | 89.5           |
 | EfficientAD-S | Mvtec AD   | 98.8           | 98.8           |
 
 
@@ -32,6 +32,7 @@ torch==1.13.0
 torchvision==0.14.0
 tifffile==2021.7.30
 tqdm==4.56.0
+scikit-learn==1.2.2
 ```
 
 ### Mvtec AD Dataset
@@ -47,7 +48,7 @@ tifffile==2021.7.30
 tqdm==4.56.0
 ```
 
-Download dataset:
+Download dataset (if you already have downloaded then set path to dataset (`--mvtec_ad_path`) when calling `efficientad.py`).
 
 ```
 mkdir mvtec_anomaly_detection
@@ -65,11 +66,9 @@ tar -xvf mvtec_ad_evaluation.tar.xz
 rm mvtec_ad_evaluation.tar.xz
 ```
 
-### efficientad.py
+## efficientad.py
 
-Training requires ImageNet stored somewhere. Download ImageNet training images from https://www.kaggle.com/competitions/imagenet-object-localization-challenge/data or set `--imagenet_train_path` of `efficientad.py` to other folder with general images in children folders.
-
-Training and inference for Mvtec object:
+Training and inference:
 
 ```
 python efficientad.py --dataset mvtec_ad --subdataset bottle
@@ -79,4 +78,55 @@ Evaluation with Mvtec evaluation code:
 
 ```
 python mvtec_ad_evaluation/evaluate_experiment.py --dataset_base_dir './mvtec_anomaly_detection/' --anomaly_maps_dir './output/1/anomaly_maps/mvtec_ad/' --output_dir './output/1/metrics/mvtec_ad/' --evaluated_objects bottle
+```
+
+## Reproduce paper results
+
+Reproducing results from paper requires ImageNet stored somewhere. Download ImageNet training images from https://www.kaggle.com/competitions/imagenet-object-localization-challenge/data or set `--imagenet_train_path` of `efficientad.py` to other folder with general images in children folders for example downloaded https://drive.google.com/uc?id=1n6RF08sp7RDxzKYuUoMox4RM13hqB1Jo
+
+Calls:
+
+```
+python efficientad.py --dataset mvtec_ad --subdataset bottle --model_size medium --weights models/teacher_medium.pth --imagenet_train_path ./ILSVRC/Data/CLS-LOC/train
+python efficientad.py --dataset mvtec_ad --subdataset cable --model_size medium --weights models/teacher_medium.pth --imagenet_train_path ./ILSVRC/Data/CLS-LOC/train
+python efficientad.py --dataset mvtec_ad --subdataset capsule --model_size medium --weights models/teacher_medium.pth --imagenet_train_path ./ILSVRC/Data/CLS-LOC/train
+...
+
+python efficientad.py --dataset mvtec_loco --subdataset breakfast_box --model_size medium --weights models/teacher_medium.pth --imagenet_train_path ./ILSVRC/Data/CLS-LOC/train
+python efficientad.py --dataset mvtec_loco --subdataset juice_bottle --model_size medium --weights models/teacher_medium.pth --imagenet_train_path ./ILSVRC/Data/CLS-LOC/train
+...
+```
+
+## Mvtec LOCO Dataset
+
+Download dataset:
+
+```
+mkdir mvtec_loco_anomaly_detection
+cd mvtec_loco_anomaly_detection
+wget https://www.mydrive.ch/shares/48237/1b9106ccdfbb09a0c414bd49fe44a14a/download/430647091-1646842701/mvtec_loco_anomaly_detection.tar.xz
+tar -xf mvtec_loco_anomaly_detection.tar.xz
+cd ..
+```
+
+Download evaluation code:
+
+```
+wget https://www.mydrive.ch/shares/48245/a4e9922c5efa93f57b6a0ff9f5c6b969/download/430648014-1646847095/mvtec_loco_ad_evaluation.tar.xz
+tar -xvf mvtec_loco_ad_evaluation.tar.xz
+rm mvtec_loco_ad_evaluation.tar.xz
+```
+
+Install same packages as for Mvtec AD evaluation code, see above.
+
+Training and inference for LOCO sub-dataset:
+
+```
+python efficientad.py --dataset mvtec_loco --subdataset breakfast_box
+```
+
+Evaluation with LOCO evaluation code:
+
+```
+python mvtec_loco_ad_evaluation/evaluate_experiment.py --dataset_base_dir './mvtec_loco_anomaly_detection/' --anomaly_maps_dir './output/1/anomaly_maps/mvtec_loco/' --output_dir './output/1/metrics/mvtec_loco/' --object_name breakfast_box
 ```
