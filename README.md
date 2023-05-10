@@ -97,7 +97,7 @@ python efficientad.py --dataset mvtec_loco --subdataset juice_bottle --model_siz
 ...
 ```
 
-This produced the Mvtec AD results in `results/metrics.json`.
+This produced the Mvtec AD results in `results/mvtec_ad_medium.json`.
 
 ## Mvtec LOCO Dataset
 
