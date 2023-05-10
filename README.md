@@ -1,16 +1,20 @@
 # EfficientAD
 Unofficial implementation of paper https://arxiv.org/abs/2303.14535
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/efficientad-accurate-visual-anomaly-detection/anomaly-detection-on-mvtec-loco-ad)](https://paperswithcode.com/sota/anomaly-detection-on-mvtec-loco-ad?p=efficientad-accurate-visual-anomaly-detection)
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/efficientad-accurate-visual-anomaly-detection/anomaly-detection-on-visa)](https://paperswithcode.com/sota/anomaly-detection-on-visa?p=efficientad-accurate-visual-anomaly-detection)
+
 ## Results
 
 | Model         | Dataset    | Official Paper | efficientad.py |
 |---------------|------------|----------------|----------------|
-| EfficientAD-M | VisA       | 98.1           | pending        |
-| EfficientAD-M | Mvtec LOCO | 90.7           | 90.1           |
 | EfficientAD-M | Mvtec AD   | 99.1           | 99.1           |
-| EfficientAD-S | VisA       | 97.5           | pending        |
+| EfficientAD-M | VisA       | 98.1           | 98.2           |
+| EfficientAD-M | Mvtec LOCO | 90.7           | 90.1           |
+| EfficientAD-S | Mvtec AD   | 98.8           | 99.0           |
+| EfficientAD-S | VisA       | 97.5           | 97.6           |
 | EfficientAD-S | Mvtec LOCO | 90.0           | 89.5           |
-| EfficientAD-S | Mvtec AD   | 98.8           | 98.8           |
 
 
 ## Benchmarks
