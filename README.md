@@ -3,8 +3,6 @@ Unofficial implementation of paper https://arxiv.org/abs/2303.14535
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/efficientad-accurate-visual-anomaly-detection/anomaly-detection-on-mvtec-loco-ad)](https://paperswithcode.com/sota/anomaly-detection-on-mvtec-loco-ad?p=efficientad-accurate-visual-anomaly-detection)
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/efficientad-accurate-visual-anomaly-detection/anomaly-detection-on-visa)](https://paperswithcode.com/sota/anomaly-detection-on-visa?p=efficientad-accurate-visual-anomaly-detection)
-
 ## Results
 
 | Model         | Dataset    | Official Paper | efficientad.py |
